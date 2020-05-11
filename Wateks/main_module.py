@@ -2,10 +2,8 @@ import os
 import numpy as np
 from datetime import datetime
 from Wateks import preprocessing, apply_along_axis, export_arr
-from BanDiTS.statistical_functions import *
 from Wateks.filter_functions import *
 from Wateks.water_functions import *
-from BanDiTS.breakpoint_functions import *
 from pathos import multiprocessing as mp
 
 
@@ -25,7 +23,7 @@ def main():
 
 
     # Input File Name
-    raster_filename = "Driekoppies_VH_median_filter3"
+    raster_filename = "Driekoppies_VH_median_filter3_threshold_li7"
 
     ###################################     OUTPUT    ########################################
 
@@ -50,8 +48,8 @@ def main():
 
     ################### USER-DEPENDENT WATER FUNCTIONS TO BE USED ######################
     # Example for water function:
-    water_functions = [count_threshold]
-    water_args = [{"lower":-23.45, "upper":-22}]  # take care of name of statistical arguments in export (line 113)
+    water_functions = [binary]
+    water_args = [{}]  # take care of name of statistical arguments in export (line 113)
 
     ######################   NO USER INPUT BEYOND THIS POINT   ###############################
 
