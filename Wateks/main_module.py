@@ -1,9 +1,10 @@
 import os
 import numpy as np
 from datetime import datetime
-from Wateks import preprocessing, apply_along_axis, export_arr
+from Wateks import preprocessing, apply_along_axis, export_arr, single_band_thresholding
 from Wateks.filter_functions import *
 from Wateks.water_functions import *
+from Wateks.binary_functions import *
 from pathos import multiprocessing as mp
 
 
@@ -48,12 +49,17 @@ def main():
 
     ################### USER-DEPENDENT WATER FUNCTIONS TO BE USED ######################
     # Example for water function:
-    water_functions = [binary]
+    water_functions = [binary_triangle]
     water_args = [{}]  # take care of name of statistical arguments in export (line 113)
+
+    ################### USER-DEPENDENT BINARY FUNCTIONS TO BE USED ######################
+    # Example for water function:
+    binary_functions = [binary_triangle]
+    binary_args = [{}]  # take care of name of statistical arguments in export (line 113)
 
     ######################   NO USER INPUT BEYOND THIS POINT   ###############################
 
-    return raster_folder, raster_filename, output_folder, filter_functions, filter_args, water_functions, water_args
+    return raster_folder, raster_filename, output_folder, filter_functions, filter_args, water_functions, water_args, binary_functions, binary_args
 
 
 def filter_func(raster_folder, raster_filename, output_folder, filter_functions, filter_args):
@@ -119,7 +125,42 @@ def water_func(raster_folder, raster_filename, output_folder, water_functions, w
         func_name = str(func)[func_name_start:func_name_end]
 
         # exporting result to new raster
-        export_arr.functions_out_array(outname=outname + "_" + func_name + str(10), arr=result, input_file=input_raster,
+        export_arr.functions_out_array(outname=outname + "_" + func_name + str(16), arr=result, input_file=input_raster,
+                                       dtype=dtype)
+
+    # print time to this point
+    statistics_time = datetime.now()
+    print("breakpoint-time = ", statistics_time - start_time, "Hr:min:sec")
+
+def bin_func(raster_folder, raster_filename, output_folder, binary_functions, binary_args):
+    start_time = datetime.now()
+    input_raster = os.path.join(raster_folder, raster_filename)
+    hdr_file = ""  # input_raster + ".hdr"        # only used for ENVI stacks
+    outname = os.path.join(output_folder, raster_filename)
+    if outname.find(".tif") != -1:
+        outname = outname[0:len(outname) - 4]
+
+    # arr: full size numpy array 3D XxYxZ 200x300x100
+    arr = preprocessing.rio_array(input_raster, hdr_file=hdr_file)
+
+    # activate to get list of dates from .hdr file (.hdr file needs to be specified above)
+    dates = arr[1]
+
+    for i, func in enumerate(binary_functions):
+        # threshold_size = str(statistical_args[i]['threshold_size'])
+        # creating results with calling wanted algorithm in parallel_apply_along_axis for quick runtime
+        result = apply_along_axis.parallel_apply_along_axis(func1d=func, arr=arr[0], axis=0,
+                                                            cores=mp.cpu_count(), **binary_args[i])
+
+        # selecting dtype based on result
+        dtype = type(result[0][0])
+
+        func_name_end = str(func).find(" at")
+        func_name_start = 10
+        func_name = str(func)[func_name_start:func_name_end]
+
+        # exporting result to new raster
+        export_arr.functions_out_array(outname=outname + "_" + func_name + str(17), arr=result, input_file=input_raster,
                                        dtype=dtype)
 
     # print time to this point
@@ -137,6 +178,11 @@ if __name__ == '__main__':
     #             filter_args=in_variables[4])
 
     # call this function to execute water functions:
-    water_func(raster_folder=str(in_variables[0]), raster_filename=str(in_variables[1]),
-                    output_folder=str(in_variables[2]), water_functions=in_variables[5],
-                    water_args=in_variables[6])
+    # water_func(raster_folder=str(in_variables[0]), raster_filename=str(in_variables[1]),
+    #                 output_folder=str(in_variables[2]), water_functions=in_variables[5],
+    #                 water_args=in_variables[6])
+
+    # call this function to execute binary functions:
+    bin_func(raster_folder=str(in_variables[0]), raster_filename=str(in_variables[1]),
+               output_folder=str(in_variables[2]), binary_functions=in_variables[7],
+               binary_args=in_variables[8])

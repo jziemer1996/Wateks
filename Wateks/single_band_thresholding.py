@@ -24,7 +24,6 @@ import os
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
-from Wateks.main_module import *
 
 
 ######################################################################
@@ -39,10 +38,11 @@ from Wateks.main_module import *
 ### Bei einfachem Ausführen des Moduls muss nichts auskommentiert werden
 ### Bei komplexem Ausführen über water_functions.py Histogramme und print-Funktion auskommentieren
 
-image = io.imread("D:/HiWi/01_SALDI/Output_Mpumalanga/Driekoppies_VH_median_filter3_threshold_li7")
-thresh = threshold_li(image)
-
-binary = image < thresh
+input_folder = "D:/HiWi/01_SALDI/Output_Mpumalanga/"
+input_tif = "Driekoppies_VH_median_filter3_threshold_li7"
+input = input_folder+input_tif
+image = io.imread(input)
+thresh = threshold_triangle(image)
 
 fig, axes = plt.subplots(ncols=2, figsize=(10, 5))
 ax = axes.ravel()

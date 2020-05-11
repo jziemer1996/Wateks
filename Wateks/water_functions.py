@@ -26,16 +26,6 @@ def count_threshold2(arr1d, threshold):
     if len(peaks[0]) == 0:
         return np.int32(peaks[0][0])
 
-def binary(arr1d):
-    from skimage import io
-    from Wateks.single_band_thresholding import thresh
-    # image = io.imread("D:/HiWi/01_SALDI/Output_Mpumalanga/Driekoppies_VH_median_filter3_threshold_li7")
-    # thresh = threshold_minimum(image, nbins=256, max_iter=1000)
-    # print("threshold of separation = " + str(thresh))
-    if thresh < arr1d:
-        return 0
-    if thresh > arr1d:
-        return 1
 
 def threshold_otsu(arr1d):
     """
