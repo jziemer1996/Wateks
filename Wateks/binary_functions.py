@@ -1,3 +1,12 @@
+def binary_otsu(arr1d):
+    from skimage import io
+    from Wateks.threshold_store import thresh_otsu
+    if thresh_otsu < arr1d:
+        return 0
+    if thresh_otsu > arr1d:
+        return 1
+
+
 def binary_triangle(arr1d):
     from skimage import io
     from Wateks.threshold_store import thresh_triangle

@@ -2,9 +2,10 @@ from skimage import io
 from skimage.filters import *
 
 input_folder = "D:/HiWi/01_SALDI/Output_Mpumalanga/"
-input_tif = "Driekoppies_VH_median_filter3_threshold_li7"
+input_tif = "Driekoppies_VH_median_filter3_threshold_otsu5"
 input = input_folder+input_tif
 image = io.imread(input)
+thresh_otsu = threshold_otsu(image)
 thresh_triangle = threshold_triangle(image)
 thresh_mean = threshold_mean(image)
 thresh_minimum = threshold_minimum(image)
