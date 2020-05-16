@@ -1,7 +1,7 @@
 import os
 import numpy as np
 from datetime import datetime
-from Wateks import preprocessing, apply_along_axis, export_arr, single_band_thresholding
+from Wateks import preprocessing, apply_along_axis, export_arr
 from Wateks.filter_functions import *
 from Wateks.water_functions import *
 from Wateks.binary_functions import *
@@ -24,7 +24,7 @@ def main():
 
 
     # Input File Name
-    raster_filename = "Driekoppies_VH_median_filter3_threshold_li7"
+    raster_filename = "Driekoppies_VV_median_filter3"
 
     ###################################     OUTPUT    ########################################
 
@@ -49,7 +49,7 @@ def main():
 
     ################### USER-DEPENDENT WATER FUNCTIONS TO BE USED ######################
     # Example for water function:
-    water_functions = [binary_triangle]
+    water_functions = [threshold_median]
     water_args = [{}]  # take care of name of statistical arguments in export (line 113)
 
     ################### USER-DEPENDENT BINARY FUNCTIONS TO BE USED ######################
@@ -178,11 +178,11 @@ if __name__ == '__main__':
     #             filter_args=in_variables[4])
 
     # call this function to execute water functions:
-    # water_func(raster_folder=str(in_variables[0]), raster_filename=str(in_variables[1]),
-    #                 output_folder=str(in_variables[2]), water_functions=in_variables[5],
-    #                 water_args=in_variables[6])
+    water_func(raster_folder=str(in_variables[0]), raster_filename=str(in_variables[1]),
+                    output_folder=str(in_variables[2]), water_functions=in_variables[5],
+                    water_args=in_variables[6])
 
     # call this function to execute binary functions:
-    bin_func(raster_folder=str(in_variables[0]), raster_filename=str(in_variables[1]),
-               output_folder=str(in_variables[2]), binary_functions=in_variables[7],
-               binary_args=in_variables[8])
+    # bin_func(raster_folder=str(in_variables[0]), raster_filename=str(in_variables[1]),
+    #            output_folder=str(in_variables[2]), binary_functions=in_variables[7],
+    #            binary_args=in_variables[8])

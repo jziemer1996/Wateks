@@ -39,7 +39,7 @@ from matplotlib import pyplot as plt
 ### Bei komplexem Ausführen über water_functions.py Histogramme und print-Funktion auskommentieren
 
 input_folder = "D:/HiWi/01_SALDI/Output_Mpumalanga/"
-input_tif = "Driekoppies_VH_median_filter3_threshold_li7"
+input_tif = "Driekoppies_VH_median_filter3_threshold_otsu5"
 input = input_folder+input_tif
 image = io.imread(input)
 thresh = threshold_triangle(image)
