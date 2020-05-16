@@ -83,6 +83,17 @@ def threshold_triangle(arr1d):
     thresh = sf.threshold_triangle(arr1d, nbins=256)
     return thresh
 
+
+def threshold_median(arr1d):
+    """
+    WORKS !!!
+    :param arr1d:
+    :return:
+    """
+    import numpy as np
+    thresh = np.median(arr1d)
+    return thresh
+
 ################################ NOT WORKING FUNCTIONS #############################
 
 
@@ -105,7 +116,7 @@ def threshold_minimum(arr1d):
     :return:
     """
     import skimage.filters as sf
-    thresh = sf.threshold_minimum(arr1d, nbins=256, max_iter=1000)
+    thresh = sf.threshold_minimum(arr1d, nbins=256, max_iter=100)
     return thresh
 
 
