@@ -1,5 +1,14 @@
+# ----------------------------------------EXPORT ARRAY MODULE-------------------------------------- #
+
+# Module to export the analyzed raster stacks to home directory.
+
+# ------------------------------------------------------------------------------------------------- #
+
+##############################     IMPORT OF REQUIRED MODULES    ###################################
+
 import rasterio as rio
 
+#####################################     STACK EXPORT    ##########################################
 
 def functions_out_array(outname, arr, input_file, dtype):
     """

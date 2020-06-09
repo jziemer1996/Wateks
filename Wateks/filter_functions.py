@@ -1,3 +1,11 @@
+# ----------------------------------------FILTER FUNCTIONS MODULE----------------------------------- #
+
+# Module to filter the preprocessed raster stacks to minimize the influence of soil moisture a.s.o.
+# It is highly recommended to execute this module before analyzing the raster stack!
+# Make use of small filter sizes to smooth the curve not too much!
+
+# ------------------------------------------------------------------------------------------------- #
+
 def mean_filter(arr1d, kernel):
     """
     reference: https://docs.scipy.org/doc/numpy/reference/generated/numpy.convolve.html

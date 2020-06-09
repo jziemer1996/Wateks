@@ -1,17 +1,11 @@
-"""
-============
-Thresholding
-============
+# -------------------------------SINGLE BAND THRESHOLDING MODULE----------------------------------- #
 
-Thresholding is used to create a binary image from a grayscale image [1]_.
+# Module for the detection of water in one image (binary analysis).
+# Execute this script as stand alone!
+# ------------------------------------------------------------------------------------------------- #
 
-.. [1] https://en.wikipedia.org/wiki/Thresholding_%28image_processing%29
+##############################     IMPORT OF REQUIRED MODULES    ###################################
 
-.. seealso::
-    A more comprehensive presentation on
-    :ref:`sphx_glr_auto_examples_applications_plot_thresholding.py`
-
-"""
 import collections
 
 import matplotlib.pyplot as plt
@@ -26,16 +20,15 @@ import numpy as np
 from matplotlib import pyplot as plt
 import _collections
 
-"""
-Bei einfachem Ausführen des Moduls muss nichts auskommentiert werden
-Bei komplexem Ausführen über water_functions.py Histogramme und print-Funktion auskommentieren
-"""
+########################################     INPUT    ##############################################
 
 input_folder = "F:/HiWi/01_SALDI/Output_Mpumalanga/"
 input_tif = "Driekoppies_VH_median_filter3_threshold_otsu5_binary_otsu17"
 input = input_folder+input_tif
 image = io.imread(input)
 thresh = threshold_triangle(image)
+
+######################################     HISTOGRAM    ############################################
 
 fig, axes = plt.subplots(ncols=2, figsize=(10, 5))
 ax = axes.ravel()
@@ -52,6 +45,7 @@ ax[1].axvline(thresh, color='r')
 
 plt.show()
 
+###################################     CLASSIFICATION REPORT    ###################################
 
 # Number of pixels on x_axis
 x_axis_len = image.shape[1]  # length of x-axis
@@ -70,7 +64,5 @@ print("Number of water-pixels in image = ")
 number_of_water = np.count_nonzero(image == 1)
 print((number_of_water/sum)*100, "%")
 print(number_of_water)
-
-
 
 print("threshold of separation = " + str(thresh))

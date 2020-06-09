@@ -1,3 +1,10 @@
+# -----------------------------------BINARY FUNCTIONS MODULE--------------------------------------- #
+
+# Module for the detection of water in one image (binary analysis).
+# To make use of the functionality implemented in this module, first execute water_functions.py!
+
+# ------------------------------------------------------------------------------------------------- #
+
 def binary_otsu(arr1d):
     from skimage import io
     from Wateks.threshold_store import thresh_otsu

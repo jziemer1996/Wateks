@@ -1,7 +1,16 @@
+# ------------------------------------PREPROCESSING MODULE--------------------------------------- #
+
+# Module to preprocess raster stacks for further analysis.
+
+# ------------------------------------------------------------------------------------------------- #
+
+##############################     IMPORT OF REQUIRED MODULES    ###################################
+
 import rasterio as rio
 import numpy as np
 import fiona
 
+##############################     PREPROCESSING FUNCTIONS     ####################################
 
 def fiona_shape(shape_path):
     """

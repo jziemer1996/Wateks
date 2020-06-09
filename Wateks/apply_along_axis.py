@@ -1,6 +1,15 @@
+# ------------------------------------APPLY ALONG AXIS MODULE-------------------------------------- #
+
+# Module to make the analysis of the raster stacks performant.
+
+# ------------------------------------------------------------------------------------------------- #
+
+##############################     IMPORT OF REQUIRED MODULES    ###################################
+
 from pathos import multiprocessing as mp
 import numpy as np
 
+####################################     APPLY ALONG AXIS    #######################################
 
 def parallel_apply_along_axis(func1d, axis, arr, cores, *args, **kwargs):
     """

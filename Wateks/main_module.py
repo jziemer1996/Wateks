@@ -1,3 +1,14 @@
+# ----------------------WATEKS (Water Detektion in Sentinel-1 Time Series-------------------------- #
+
+# Tool to to detect surface water bodies and their temporally fluctuating water extent over a series of time.
+# Source Code: BanDiTS (by Marlin Mueller & Jonas Ziemer)
+
+# ------------------------------------------------------------------------------------------------- #
+# Author: Jonas Ziemer
+# ------------------------------------------------------------------------------------------------- #
+
+##############################     IMPORT OF REQUIRED MODULES    ###################################
+
 import os
 import numpy as np
 from datetime import datetime
@@ -15,13 +26,7 @@ def main():
     # raster_folder = "D:/HiWi/01_SALDI/Layerstacks/Pilanesberg/13_eskom_powerlines_jonas/"
     # raster_folder = "D:/HiWi/AAA_GEO402_Daten/"
 
-    # raster_folder = "D:/HiWi/01_SALDI/Output_Augrabies/"
-    # raster_folder = "D:/HiWi/01_SALDI/Output_Mokala/"
     raster_folder = "D:/HiWi/01_SALDI/Output_Mpumalanga/"
-    # raster_folder = "D:/HiWi/01_SALDI/Output_Freestate/"
-    # raster_folder = "D:/HiWi/01_SALDI/Output_Pilanesberg/"
-    # raster_folder = "D:/HiWi/01_SALDI/Output_Agulhas/"
-
 
     # Input File Name
     raster_filename = "Driekoppies_VV_median_filter3"

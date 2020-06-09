@@ -1,5 +1,15 @@
+# ------------------------------------THRESHOLD STORE MODULE--------------------------------------- #
+
+# Module to store threshold functions used in water_functions.py and binary_functions.py.
+
+# ------------------------------------------------------------------------------------------------- #
+
+##############################     IMPORT OF REQUIRED MODULES    ###################################
+
 from skimage import io
 from skimage.filters import *
+
+##############################     THRESOLD FUNCTIONS STORE      ###################################
 
 input_folder = "D:/HiWi/01_SALDI/Output_Mpumalanga/"
 input_tif = "Driekoppies_VH_median_filter3_threshold_otsu5"

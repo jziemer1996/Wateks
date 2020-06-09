@@ -1,8 +1,18 @@
-################################ WORKING FUNCTIONS #############################
+# ----------------------------------------WATER FUNCTIONS MODULE----------------------------------- #
+
+# Module for the detection of water extent over time (non-binary analysis).
+# Precondition to execute binary_functions.py.
+
+# ------------------------------------------------------------------------------------------------- #
+
+##############################     IMPORT OF REQUIRED MODULES    ###################################
+
 import skimage
 import skimage.filters as sf
 from skimage.filters import *
 from scipy.signal import find_peaks
+
+################################     WORKING FUNCTIONS     #########################################
 
 def count_threshold(arr1d, lower, upper):
     from scipy.signal import find_peaks
@@ -94,8 +104,7 @@ def threshold_median(arr1d):
     thresh = np.median(arr1d)
     return thresh
 
-################################ NOT WORKING FUNCTIONS #############################
-
+##############################     NON-WORKING FUNCTIONS     #######################################
 
 def threshold_local(arr1d):
     """
@@ -175,8 +184,7 @@ def unsharp_mask(arr1d):
                              preserve_range=False)
     return thresh
 
-
-################################ LETS GIVIT A TRY FUNCTIONS #############################
+################################    LETS GIVIT A TRY FUNCTIONS    ##################################
 
 def inverse(arr1d):
     import skimage.filters as sf
