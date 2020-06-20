@@ -26,15 +26,15 @@ def main():
     # raster_folder = "D:/HiWi/01_SALDI/Layerstacks/Pilanesberg/13_eskom_powerlines_jonas/"
     # raster_folder = "D:/HiWi/AAA_GEO402_Daten/"
 
-    raster_folder = "D:/HiWi/01_SALDI/Output_Mpumalanga/"
+    raster_folder = "F:/HiWi/01_SALDI/Output_Mpumalanga/"
 
     # Input File Name
-    raster_filename = "Driekoppies_VV_median_filter3"
+    raster_filename = "Driekoppies_VH_median_filter3"
 
     ###################################     OUTPUT    ########################################
 
     # Output Folder:
-    output_folder = "D:/HiWi/01_SALDI/Output_Mpumalanga/"
+    output_folder = "F:/HiWi/01_SALDI/Output_Mpumalanga/"
 
     ####################### USER-DEPENDENT FILTER-FUNCTIONS TO BE USED #######################
     # Example for mean filter:
@@ -54,8 +54,8 @@ def main():
 
     ################### USER-DEPENDENT WATER FUNCTIONS TO BE USED ######################
     # Example for water function:
-    water_functions = [threshold_median]
-    water_args = [{}]  # take care of name of statistical arguments in export (line 113)
+    water_functions = [count_abs_index]
+    water_args = [{"lower":-24, "upper":-22}]  # take care of name of statistical arguments in export (line 113)
 
     ################### USER-DEPENDENT BINARY FUNCTIONS TO BE USED ######################
     # Example for water function:
@@ -130,7 +130,7 @@ def water_func(raster_folder, raster_filename, output_folder, water_functions, w
         func_name = str(func)[func_name_start:func_name_end]
 
         # exporting result to new raster
-        export_arr.functions_out_array(outname=outname + "_" + func_name + str(16), arr=result, input_file=input_raster,
+        export_arr.functions_out_array(outname=outname + "_" + func_name + str(1), arr=result, input_file=input_raster,
                                        dtype=dtype)
 
     # print time to this point
