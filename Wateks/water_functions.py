@@ -14,27 +14,92 @@ from scipy.signal import find_peaks
 
 ################################     WORKING FUNCTIONS     #########################################
 
-def count_threshold(arr1d, lower, upper):
+def count_abs_peak(arr1d, threshold):
+    """
+        calculates the number of scenes which are underflooded depending on the peak count function which
+        calculates how often the signal drops beneath a certain threshold
+        ----------
+        arr1d: numpy.array
+            1D array representing the time series for one pixel
+        threshold: float
+            radar backscatter value - depends on type of polarization (smaller for VH than for VV)
+
+        Returns
+        ----------
+        numpy.int32
+            returns the number of how often the radar signal drops beneath a certain threshold
+    """
+    from scipy.signal import find_peaks
+    peaks = find_peaks(arr1d, height=threshold)
+    return len(peaks)
+
+
+def count_interval_peak(arr1d, lower, upper):
+    """
+        calculates the number of scenes which are underflooded depending on the peak count function which
+        calculates how often the signal drops beneath a certain threshold interval
+        ----------
+        arr1d: numpy.array
+            1D array representing the time series for one pixel
+        lower: float
+            lower radar backscatter value - depends on type of polarization (smaller for VH than for VV)
+        upper: float
+            Upper radar backscatter value - depends on type of polarization (smaller for VH than for VV)
+
+        Returns
+        ----------
+        numpy.int32
+            returns the number of how often the radar signal drops beneath a certain threshold
+    """
     from scipy.signal import find_peaks
     peaks = find_peaks(arr1d, height=(lower, upper))
     return len(peaks[0])
 
 
-def count_threshold1(arr1d, threshold):
-    from scipy.signal import find_peaks
-    import numpy as np
-    peaks = find_peaks(arr1d, height=threshold)
-    return len(peaks)
+def count_abs_index(arr1d, threshold):
+    """
+        calculates the total number of scenes which are underflooded depending on an certain threshold considering the
+        total number of available scenes
+        ----------
+        arr1d: numpy.array
+            1D array representing the time series for one pixel
+        threshold: float
+            radar backscatter value - depends on type of polarization (smaller for VH than for VV)
+
+        Returns
+        ----------
+        numpy.int32
+            returns the number of total scenes which are inundated in the time series stack
+    """
+    count = 0
+    for ele in arr1d:
+        if ele <= threshold:
+            count = count + 1
+    return count
 
 
-def count_threshold2(arr1d, threshold):
-    from scipy.signal import find_peaks
-    import numpy as np
-    peaks = find_peaks(arr1d, height=threshold)
-    if len(peaks[0]) >= 1:
-        return np.int32(peaks[0][0])
-    if len(peaks[0]) == 0:
-        return np.int32(peaks[0][0])
+def count_interval_index(arr1d, lower, upper):
+    """
+        calculates the total number of scenes which are underflooded depending on an threshold interval considering the
+        total number of available scenes
+        ----------
+        arr1d: numpy.array
+            1D array representing the time series for one pixel
+        lower: float
+            lower radar backscatter value - depends on type of polarization (smaller for VH than for VV)
+        upper: float
+            Upper radar backscatter value - depends on type of polarization (smaller for VH than for VV)
+
+        Returns
+        ----------
+        numpy.int32
+            returns the number of total scenes which are inundated in the time series stack
+    """
+    count = 0
+    for ele in arr1d:
+        if ele >= lower and ele <= upper:
+            count = count + 1
+    return count
 
 
 def threshold_otsu(arr1d):
